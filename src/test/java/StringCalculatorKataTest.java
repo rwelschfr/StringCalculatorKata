@@ -12,16 +12,22 @@ public class StringCalculatorKataTest {
     private StringCalculatorKata stringCalculatorKata;
 
     @Test
-    public void testAddStep1() throws Exception {
+    public void testAddStep1() {
         assertEquals(0, stringCalculatorKata.add(""));
         assertEquals(1, stringCalculatorKata.add("1"));
         assertEquals(3, stringCalculatorKata.add("1,2"));
     }
 
     @Test
-    public void testAddStep2() throws Exception {
+    public void testAddStep2() {
         assertEquals(6, stringCalculatorKata.add("1,2,3"));
         assertEquals(10, stringCalculatorKata.add("1,2,3,4"));
+    }
+
+    @Test
+    public void testAddStep3() {
+        assertEquals(6, stringCalculatorKata.add("1,2\n3"));
+        assertEquals(10, stringCalculatorKata.add("1,2\n3,4"));
     }
 
 }

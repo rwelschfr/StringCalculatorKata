@@ -1,6 +1,6 @@
 public class StringCalculatorKata {
 
-    public int add(String numbers) throws Exception {
+    public int add(String numbers) {
         int result = 0;
         String[] split = numbers.split(",");
         for(String number : split) {
