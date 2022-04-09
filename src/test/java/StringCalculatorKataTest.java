@@ -35,4 +35,9 @@ public class StringCalculatorKataTest {
         assertEquals(10, stringCalculatorKata.add("//loremipsum\n1loremipsum2\n3,4"));
     }
 
+    @Test
+    public void testAddStep5() {
+        assertThrowsExactly(Exception.class, () -> stringCalculatorKata.add("1,-2"), "negatives not allowed: -2");
+        assertThrowsExactly(Exception.class, () -> stringCalculatorKata.add("1,-2,3,-4"), "negatives not allowed: -2,-4");
+    }
 }
