@@ -16,7 +16,12 @@ public class StringCalculatorKataTest {
         assertEquals(0, stringCalculatorKata.add(""));
         assertEquals(1, stringCalculatorKata.add("1"));
         assertEquals(3, stringCalculatorKata.add("1,2"));
-        assertThrows(Exception.class, () -> stringCalculatorKata.add("1,2,3"));
+    }
+
+    @Test
+    public void testAddStep2() throws Exception {
+        assertEquals(6, stringCalculatorKata.add("1,2,3"));
+        assertEquals(10, stringCalculatorKata.add("1,2,3,4"));
     }
 
 }
