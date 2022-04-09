@@ -32,7 +32,7 @@ public class StringCalculatorKataTest {
 
     @Test
     public void testAddStep4() {
-        assertEquals(10, stringCalculatorKata.add("//;\n1;2\n3,4"));
+        assertEquals(10, stringCalculatorKata.add("//loremipsum\n1loremipsum2\n3,4"));
     }
 
 }
