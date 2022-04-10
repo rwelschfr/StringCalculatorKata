@@ -1,43 +1,31 @@
-import java.util.ArrayList;
+import parser.Parser;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StringCalculatorKata {
 
     public int add(String numbers) throws Exception {
-        int result = 0;
-        String splitRegex = ",|\n";
-
-        if(numbers.startsWith("//")) {
-            int index = numbers.indexOf("\n");
-            String delimiter = numbers.substring(2, index);
-            splitRegex = splitRegex + "|" + delimiter;
-            numbers = numbers.substring(index + 1);
+        if("".equals(numbers)) {
+            return 0;
         }
 
-        String[] split = numbers.split(splitRegex);
-        List<Integer> negatives = new ArrayList<>();
-        for(String number : split) {
-            if(!number.isEmpty()) {
-                Integer integer = Integer.valueOf(number);
-                if(integer < 0) {
-                    negatives.add(integer);
-                }
-                result += integer;
-            }
-        }
+        List<Integer> split = Parser.parseString(numbers);
+        checkNegativeNumbers(split);
 
-        if(!negatives.isEmpty()) {
-            String exceptionMsg = "negatives not allowed: ";
-            for(Integer integer : negatives) {
-                exceptionMsg = exceptionMsg + String.valueOf(integer);
-                if(negatives.indexOf(integer) < negatives.size() - 1) {
-                    exceptionMsg = exceptionMsg + ",";
-                }
-            }
-            throw new Exception(exceptionMsg);
-        }
-
-        return result;
+        return split.stream().reduce(0, Integer::sum);
     }
 
+    private void checkNegativeNumbers(List<Integer> split) throws Exception {
+        List<Integer> negatives = split.stream()
+                .filter(i -> i < 0)
+                .collect(Collectors.toList());
+
+        if(!negatives.isEmpty()) {
+            String negativesStr = negatives.stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.joining(","));
+            throw new Exception("negatives not allowed: " + negativesStr);
+        }
+    }
 }
